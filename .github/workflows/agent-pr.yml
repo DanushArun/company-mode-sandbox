@@ -1,0 +1,49 @@
+name: Agent PR
+
+on:
+  push:
+    branches: ["agent/**"]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Open PR for this agent branch (idempotent)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.ref_name }}
+          BASE: ${{ github.event.repository.default_branch }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          existing="$(gh pr list --repo "$REPO" --head "$BRANCH" --state open --json number --jq '.[0].number' || true)"
+          if [ -n "$existing" ]; then
+            echo "PR #$existing already open for $BRANCH, nothing to do."
+            exit 0
+          fi
+
+          title="$(git log -1 --format=%s)"
+          commit_body="$(git log -1 --format=%b)"
+          footer="Opened automatically for an agent branch. Only the Board merges."
+
+          if [ -n "$commit_body" ]; then
+            body="$(printf '%s\n\n%s' "$commit_body" "$footer")"
+          else
+            body="$footer"
+          fi
+
+          gh pr create \
+            --repo "$REPO" \
+            --base "$BASE" \
+            --head "$BRANCH" \
+            --title "$title" \
+            --body "$body"

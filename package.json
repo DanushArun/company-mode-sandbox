@@ -1,0 +1,12 @@
+{
+  "name": "company-mode-sandbox",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Company Mode demo target: a tiny in-memory tasks API.",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  }
+}
