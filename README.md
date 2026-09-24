@@ -39,3 +39,4 @@ pushed (see `AGENTS.md` and Company Mode's `docs/CONTRACTS.md`).
 ## Demo tickets
 
 See `DEMO_TICKETS.md` for suggested Linear tickets to run through Company Mode against this repo.
+
