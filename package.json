@@ -1,10 +1,12 @@
 {
-  "name": "company-mode-sandbox",
+  "name": "tasks-api",
   "version": "0.1.0",
   "private": true,
-  "description": "Company Mode demo target: a tiny in-memory tasks API.",
+  "description": "A minimal in-memory tasks API (Node.js, zero dependencies).",
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "node server.js",
     "test": "node --test"
