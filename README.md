@@ -1,11 +1,6 @@
-# company-mode-sandbox
+# tasks-api
 
-This is the demo target repository for [Company Mode](https://github.com/DanushArun/company-mode): a
-tiny, dependency-free Node.js "tasks API" that Company Mode's agents (Forge, Pixel, Sentinel) work
-against to demonstrate the full Linear -> Paperclip -> branch -> PR -> review -> merge loop.
-
-It is deliberately small and boring so that the interesting part of any demo is the agent workflow,
-not the app.
+A minimal in-memory tasks API written in plain Node.js, with zero runtime dependencies.
 
 ## API
 
@@ -34,8 +29,4 @@ Uses Node's built-in test runner (`node --test`) - no test framework dependency.
 
 `.github/workflows/ci.yml` runs `npm test` on every push and pull request (required check: `ci`).
 `.github/workflows/agent-pr.yml` opens a pull request automatically when an `agent/**` branch is
-pushed (see `AGENTS.md` and Company Mode's `docs/CONTRACTS.md`).
-
-## Demo tickets
-
-See `DEMO_TICKETS.md` for suggested Linear tickets to run through Company Mode against this repo.
+pushed - see `AGENTS.md` for the rules that branch is expected to follow.
